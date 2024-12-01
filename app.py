@@ -82,7 +82,6 @@ def predict_crop():
         
         # Convert features to DataFrame (important to ensure column names are used)
         features_df = pd.DataFrame([features])
-        
     
         
         # Make prediction using the model
