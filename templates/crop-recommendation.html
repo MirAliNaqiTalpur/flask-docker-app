@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Recommendation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #result { margin-top: 20px; }
+        #error { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Crop Recommendation</h1>
+    <form id="cropForm" method="post" action="/predict_crop">
+        <div class="form-group">
+            <label for="nitrogen">Nitrogen (kg/ha):</label>
+            <input type="number" class="form-control" id="nitrogen" name="nitrogen" required>
+        </div>
+        <div class="form-group">
+            <label for="phosphorus">Phosphorus (kg/ha):</label>
+            <input type="number" class="form-control" id="phosphorus" name="phosphorus" required>
+        </div>
+        <div class="form-group">
+            <label for="potassium">Potassium (kg/ha):</label>
+            <input type="number" class="form-control" id="potassium" name="potassium" required>
+        </div>
+        <div class="form-group">
+            <label for="temperature">Temperature (°C):</label>
+            <input type="number" step="0.1" class="form-control" id="temperature" name="temperature" required>
+        </div>
+        <div class="form-group">
+            <label for="humidity">Humidity (%):</label>
+            <input type="number" step="0.1" class="form-control" id="humidity" name="humidity" required>
+        </div>
+        <div class="form-group">
+            <label for="pH">pH Value:</label>
+            <input type="number" step="0.1" class="form-control" id="pH" name="pH" required>
+        </div>
+        <div class="form-group">
+            <label for="rainfall">Rainfall (mm):</label>
+            <input type="number" step="0.1" class="form-control" id="rainfall" name="rainfall" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Recommend Crop</button>
+    </form>
+    <div id="result"></div>
+    <div id="error"></div>
+
+    <script>
+        const cropForm = document.getElementById('cropForm');
+        const resultDiv = document.getElementById('result');
+        const errorDiv = document.getElementById('error');
+    
+        cropForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission behavior
+            resultDiv.textContent = '';
+            errorDiv.textContent = '';
+    
+            // Collect form data into a JavaScript object
+            const formData = new FormData(cropForm);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+    
+            try {
+                // Send the data to the server as JSON
+                const response = await fetch('/predict_crop', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+    
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    errorDiv.textContent = errorData.error || `Error: ${response.status}`;
+                    return;
+                }
+    
+                const result = await response.json();
+                resultDiv.textContent = `Recommended Crop: ${result.recommendation}`;
+            } catch (error) {
+                errorDiv.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

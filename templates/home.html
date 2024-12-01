@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to AgriTech</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        footer {
+            padding: 20px 0;
+            background-color: #e9ecef;
+        }
+        .header-image {
+            width: 100%;
+            height: auto;
+            max-height: 300px; /* Adjusted to a shorter height */
+            object-fit: cover; /* Ensures the image covers the area without stretching */
+        }
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 4%;
+            transform: translateY(-50%);
+            color: rgb(243, 237, 237); /* Change text color for visibility */
+            font-family:'Roboto', sans-serif; font-weight: 1000;
+            font-size: 20px;
+        }
+        .service-image {
+        height: 200px; /* Set a specific height */
+        object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .services-section {
+        margin-top: -30px; /* Adjust this value to control overlap */
+        padding-top: 00px; /* Optional: gives padding at the top of the section */
+        }
+
+        .features-section {
+            margin-top: 40px; /* Adjust as needed */
+            padding-bottom: 40px;
+        }
+
+        .features-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Optional: round the corners of the image */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: add a subtle shadow */
+        }
+
+        .features-section ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+        .features-section li {
+            margin-bottom: 5px;
+        }
+
+        .clickable-image {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Makes the image fill its container */
+            transition: transform 0.3s ease; /* Add a smooth transition effect */
+        }
+
+        .clickable-image:hover {
+        transform: scale(1.05); /* Slightly enlarge the image on hover */
+        cursor: pointer; /* Indicate that the image is clickable */
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AgriTech</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Services
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/yield-prediction">Yield Prediction</a>
+                        <a class="dropdown-item" href="/crop-recommendation">Crop Recommendation</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="position-relative">
+        <!-- Header Image -->
+        <img src="{{ url_for('static', filename='agriculture.jpg') }}" alt="Agriculture" class="header-image">
+        <div class="header-content">
+            <h1>Welcome to AgriTech</h1>
+            <p>Your precision agriculture partner for a greener future!</p>
+        </div>
+    </div>
+
+    <div class="container services-section">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ url_for('static', filename='section-1.png') }}" class="card-img-top service-image" alt="Service 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Precision Recommendations</h5>
+                        <p class="card-text">Tailored advice on Crop Yields, Reesource Usage, and Sustainable Farming Practices.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ url_for('static', filename='section-2.jpg') }}" class="card-img-top service-image" alt="Service 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Risk Management</h5>
+                        <p class="card-text">Predictive analytics to prempt crop failures and optimize resource allocation effectively.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ url_for('static', filename='section-3.jpg') }}" class="card-img-top service-image" alt="Service 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Real-Time Insights</h5>
+                        <p class="card-text">Up-to-date information that enables farmers and agribusinesses to adapt to changing agricultural conditions swiftly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container features-section mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ url_for('static', filename='introduction.jpg') }}" alt="Precision Agriculture Platform in Action" class="features-image img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h2>Precision Agriculture Platform</h2>
+                <h6><strong>FOR A GREENER FUTURE</strong></h6>
+                <p>Our platform uses cutting-edge technology to optimize farming practices, leading to increased yields and reduced resource waste. We aim to enhance decision-making by mitigating gaps in Yield Variability, Supply and Demand,
+                    and Inefficient Use of Resources</p>
+                <p>Try our Services:</p>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <a href="/yield-prediction">
+                            <img src="{{ url_for('static', filename='yield-feature.jpg') }}" alt="Yield Prediction" class="clickable-image img-fluid">
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#">
+                            <img src="{{ url_for('static', filename='recommendation-feature.jpg') }}" alt="Crop Recommendation" class="clickable-image img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 mb-3">
+        <p>2024 AgriTech, Machine Learning, AIT.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
